@@ -11,14 +11,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+
+    @Autowired
+    private  UserRepository userRepository;
+
     private int idCounter = 1;
 
     private static final Logger logger = LogManager.getLogger(UserService.class);
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
 
     public User addUser(String name,  String email, String address) //entity
@@ -31,7 +30,7 @@ public class UserService {
     }
 
     public List<User> getAllUsers(){
-       return userRepository.findAllUsers();
+        return userRepository.findAllUsers();
     }
 
     public User getUserById(int id){
