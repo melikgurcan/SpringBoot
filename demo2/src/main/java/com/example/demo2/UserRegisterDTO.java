@@ -1,24 +1,19 @@
 package com.example.demo2;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-@Entity
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //mySQL
-    private int id;
-
+public class UserRegisterDTO {
     private String name;
     private String email;
     private String address;
     private int age;
+
+    @NotBlank
+    @Size(min = 11, max = 11, message = "Id Number must be 11 character long")
     private String idNumber;
 
-    public User(){}
-
-    public User(String name, String email, String address, int age, String idNumber) {
+    public UserRegisterDTO(String name, String email, String address, int age, String idNumber) {
         this.name = name;
         this.email = email;
         this.address = address;
@@ -26,44 +21,27 @@ public class User {
         this.idNumber = idNumber;
     }
 
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
-
     public int getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }

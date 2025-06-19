@@ -16,7 +16,7 @@ public class UserController {
 
 
     @PostMapping
-    public UserDTO addUser(@Valid @RequestBody UserDTO userDTO) {
+    public UserDTO addUser(@Valid @RequestBody UserRegisterDTO userDTO) {
         return userService.addUser(userDTO);
     }
 
@@ -36,8 +36,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserDTO updateUserById(@PathVariable int id, @RequestBody UserDTO userDTO) {
-        User updated = userService.updateUserById(id, UserMapper.toEntity(userDTO));
+    public UserDTO updateUserById(@PathVariable int id, @RequestBody UserDTO dto) {
+        User updated = userService.updateUserById(id, dto);
         return UserMapper.toDTO(updated);
     }
 

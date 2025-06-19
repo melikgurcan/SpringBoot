@@ -21,11 +21,10 @@ public class UserService {
     private static final Logger logger = LogManager.getLogger(UserService.class);
 
 
-    public UserDTO addUser(UserDTO dto) //entity
+    public UserDTO addUser(UserRegisterDTO dto)
     {
         logger.info("User adding...");
         User user = UserMapper.toEntity(dto);
-        user.setIdNumber(generateUniqueIdNumber());
         userRepository.saveUser(user);
         return UserMapper.toDTO(user);
     }
@@ -70,7 +69,9 @@ public class UserService {
         return userRepository.findAllUsers().stream().filter(user -> user.getName().contains(name.toLowerCase()) && user.getEmail().contains(email.toLowerCase())).toList() ;
     }
 
-    public User updateUserById(int id, User user) {
+    public User updateUserById(int id, UserDTO dto) {
+        User user = userRepository.getUserById(id);
+        UserMapper.updateEntity(user, dto);
         return userRepository.updateUserById(id,user);
     }
 
@@ -78,9 +79,5 @@ public class UserService {
         return userRepository.deleteUserById(id);
     }
 
-    public int generateUniqueIdNumber(){
-        Random random = new Random();
-        return (int)(Math.random()*10000)+1;
-    }
 
 }

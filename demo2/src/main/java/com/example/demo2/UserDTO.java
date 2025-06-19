@@ -22,7 +22,6 @@ public class UserDTO {
     @Size(min=10, message = "Address must be at least 10 characters long")
     private String address;
 
-    @NotBlank(message = "Age is required")
     @Min(value = 18, message = "Age must be above 18")
     private int age;
 
