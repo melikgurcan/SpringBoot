@@ -1,10 +1,14 @@
-package com.example.demo2;
+package com.example.demo2.controller;
 
+import com.example.demo2.user.User;
+import com.example.demo2.dto.UserDTO;
+import com.example.demo2.user.UserMapper;
+import com.example.demo2.dto.UserRegisterDTO;
+import com.example.demo2.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.util.List;
 
 @RestController
@@ -12,7 +16,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
 
     @PostMapping

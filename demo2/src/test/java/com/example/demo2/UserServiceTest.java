@@ -1,10 +1,10 @@
 package com.example.demo2;
 
 
+import com.example.demo2.repository.UserRepository;
+import com.example.demo2.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
