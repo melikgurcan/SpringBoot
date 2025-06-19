@@ -1,7 +1,8 @@
-package com.example.demo2.user;
+package com.example.demo2.Mapper;
 
 import com.example.demo2.dto.UserDTO;
 import com.example.demo2.dto.UserRegisterDTO;
+import com.example.demo2.User;
 
 public class UserMapper {
 
@@ -27,6 +28,7 @@ public class UserMapper {
         return dto;
     }
 
+    //Update user by using dto
     public static void updateEntity(User user, UserDTO dto) {
         if(dto.getName() != null)
             user.setName(dto.getName());

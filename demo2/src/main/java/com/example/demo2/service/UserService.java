@@ -1,8 +1,8 @@
 package com.example.demo2.service;
 
-import com.example.demo2.user.User;
+import com.example.demo2.User;
 import com.example.demo2.dto.UserDTO;
-import com.example.demo2.user.UserMapper;
+import com.example.demo2.Mapper.UserMapper;
 import com.example.demo2.dto.UserRegisterDTO;
 import com.example.demo2.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
@@ -25,6 +25,11 @@ public class UserService {
     public UserDTO addUser(UserRegisterDTO dto)
     {
         logger.info("User adding...");
+
+        if(userRepository.existsByEmail(dto.getEmail())){
+            throw new IllegalArgumentException("Email already exists");
+        }
+
         User user = UserMapper.toEntity(dto);
         userRepository.save(user);
         return UserMapper.toDTO(user);

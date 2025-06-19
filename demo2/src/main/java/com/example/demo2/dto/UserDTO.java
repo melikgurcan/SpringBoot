@@ -7,22 +7,9 @@ import jakarta.validation.constraints.Size;
 
 public class UserDTO {
 
-    @NotBlank(message = "Name is required!")
-    @Size(min = 3, message = "Name must be at least 3 characters long!")
     private String name;
-
-    @NotBlank(message = "Email is required!")
-    @Pattern(
-            regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9+_.-]+$",
-            message = "Invalid email format"
-    )
     private String email;
-
-    @NotBlank(message = "Address is required")
-    @Size(min=10, message = "Address must be at least 10 characters long")
     private String address;
-
-    @Min(value = 18, message = "Age must be above 18")
     private int age;
 
     public UserDTO() {}

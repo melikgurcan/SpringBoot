@@ -1,8 +1,8 @@
 package com.example.demo2.controller;
 
-import com.example.demo2.user.User;
+import com.example.demo2.User;
 import com.example.demo2.dto.UserDTO;
-import com.example.demo2.user.UserMapper;
+import com.example.demo2.Mapper.UserMapper;
 import com.example.demo2.dto.UserRegisterDTO;
 import com.example.demo2.service.UserService;
 import jakarta.validation.Valid;

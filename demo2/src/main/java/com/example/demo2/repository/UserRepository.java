@@ -1,6 +1,6 @@
 package com.example.demo2.repository;
 
-import com.example.demo2.user.User;
+import com.example.demo2.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +10,7 @@ import java.util.*;
 public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findByNameContainingIgnoreCase(String name);
     List<User> findByEmailContainingIgnoreCase(String email);
+    boolean existsByEmail(String email);
 }
 
 

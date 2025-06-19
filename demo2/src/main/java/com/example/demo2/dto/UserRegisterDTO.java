@@ -1,12 +1,29 @@
 package com.example.demo2.dto;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class UserRegisterDTO {
+
+
+    @NotBlank(message = "Name is required!")
+    @Size(min = 3, message = "Name must be at least 3 characters long!")
     private String name;
+
+    @NotBlank(message = "Email is required!")
+    @Pattern(
+            regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9+_.-]+$",
+            message = "Invalid email format"
+    )
     private String email;
+
+    @NotBlank(message = "Address is required")
+    @Size(min=10, message = "Address must be at least 10 characters long")
     private String address;
+
+    @Min(value = 18, message = "Age must be above 18")
     private int age;
 
     @NotBlank
