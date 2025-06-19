@@ -16,32 +16,33 @@ public class UserController {
 
 
     @PostMapping
-    public User addUser(@Valid @RequestBody User user) {
-        return userService.addUser(user.getName(), user.getEmail(), user.getAddress());
+    public UserDTO addUser(@Valid @RequestBody UserDTO userDTO) {
+        return userService.addUser(userDTO);
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable int id) {
+    public UserDTO getUserById(@PathVariable int id) {
         return userService.getUserById(id);
     }
 
     @GetMapping("/search")
-    public List<User> searchUser(@RequestParam(required = false) String name, @RequestParam(required = false) String email) {
+    public List<UserDTO> searchUser(@RequestParam(required = false) String name, @RequestParam(required = false) String email) {
         return userService.searchUser(name, email);
     }
 
     @PutMapping("/{id}")
-    public User updateUserById(@PathVariable int id, @RequestBody User user) {
-        return userService.updateUserById(id, user);
+    public UserDTO updateUserById(@PathVariable int id, @RequestBody UserDTO userDTO) {
+        User updated = userService.updateUserById(id, UserMapper.toEntity(userDTO));
+        return UserMapper.toDTO(updated);
     }
 
     @DeleteMapping("/{id}")
-    public User deleteUserById(@PathVariable int id) {
-        return userService.deleteUserById(id);
+    public UserDTO deleteUserById(@PathVariable int id) {
+        return UserMapper.toDTO(userService.deleteUserById(id));
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,24 +21,28 @@ public class UserService {
     private static final Logger logger = LogManager.getLogger(UserService.class);
 
 
-    public User addUser(String name,  String email, String address) //entity
+    public UserDTO addUser(UserDTO dto) //entity
     {
         logger.info("User adding...");
-        logger.debug("Full user info: name: {}, email: {}, address: {}", name, email, address);
-        User user = new User(idCounter++, name, email, address);
+        User user = UserMapper.toEntity(dto);
+        user.setIdNumber(generateUniqueIdNumber());
         userRepository.saveUser(user);
-        return user;
+        return UserMapper.toDTO(user);
     }
 
-    public List<User> getAllUsers(){
-        return userRepository.findAllUsers();
+    public List<UserDTO> getAllUsers(){
+        return userRepository.findAllUsers()
+                .stream()
+                .map(UserMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    public User getUserById(int id){
-        return userRepository.getUserById(id);
+    public UserDTO getUserById(int id){
+        User user = userRepository.getUserById(id);
+        return UserMapper.toDTO(user);
     }
 
-    public List<User> searchUser(String name, String email){
+    public List<UserDTO> searchUser(String name, String email){
         if(name != null){
             return getUserByName(name);
         }
@@ -47,12 +52,18 @@ public class UserService {
         return getAllUsers();
     }
 
-    public List<User> getUserByName(String name){
-        return userRepository.getUserByNameContains(name);
+    public List<UserDTO> getUserByName(String name){
+        return userRepository.getUserByNameContains(name)
+                .stream()
+                .map(UserMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    public List<User> getUserByEmail(String email){
-        return userRepository.getUserByEmailContains(email);
+    public List<UserDTO> getUserByEmail(String email){
+        return userRepository.getUserByEmailContains(email)
+                .stream()
+                .map(UserMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     public List<User> getUserByNameEmail(String name, String email){
@@ -65,6 +76,11 @@ public class UserService {
 
     public User deleteUserById(int id){
         return userRepository.deleteUserById(id);
+    }
+
+    public int generateUniqueIdNumber(){
+        Random random = new Random();
+        return (int)(Math.random()*10000)+1;
     }
 
 }
