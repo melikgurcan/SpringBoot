@@ -1,8 +1,8 @@
 package com.example.demo2.controller;
 
-import com.example.demo2.User;
+import com.example.demo2.repository.User;
 import com.example.demo2.dto.UserDTO;
-import com.example.demo2.Mapper.UserMapper;
+import com.example.demo2.mapper.UserMapper;
 import com.example.demo2.dto.UserRegisterDTO;
 import com.example.demo2.service.UserService;
 import jakarta.validation.Valid;
@@ -21,6 +21,7 @@ public class UserController {
 
     @PostMapping
     public UserDTO addUser(@Valid @RequestBody UserRegisterDTO userDTO) {
+
         return userService.addUser(userDTO);
     }
 

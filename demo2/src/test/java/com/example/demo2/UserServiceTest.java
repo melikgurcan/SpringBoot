@@ -1,14 +1,22 @@
 package com.example.demo2;
 
 
+import com.example.demo2.dto.UserDTO;
+import com.example.demo2.repository.User;
 import com.example.demo2.repository.UserRepository;
 import com.example.demo2.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -21,14 +29,20 @@ public class UserServiceTest {
 
     @Test
     void testGetUserById(){
-        //User user = new User(1,"Melike", "mg@gmail.com", "Sariyer", 19, 3982032);
-        //when(userRepository.getUserById(1)).thenReturn(user);
+        User user = new User();
+        user.setName("Melike");
+        user.setEmail("mg@gmail.com");
+        user.setAddress("Istanbul Sariyer");
+        user.setAge(30);
 
-        //User result = userService.getUserById(1);
+        when(userRepository.findById(1)).thenReturn(Optional.of(user));
 
-        //assertNotNull(result);
-        //assertEquals("Melike",result.getName(), "User name should be Melike");
-        //assertEquals(1, result.getId(), "User id should be 1");
+
+        UserDTO result = userService.getUserById(1);
+
+        assertNotNull(result);
+        assertEquals("Melike",result.getName(), "User name should be Melike");
+        assertEquals(1, result.getAge(), "User age should be 1");
 
     }
 
